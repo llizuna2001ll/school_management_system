@@ -1,13 +1,19 @@
 package com.digital_zone.userservice.controller;
 
+import com.digital_zone.userservice.dtos.AddEmailRequest;
 import com.digital_zone.userservice.dtos.UserRequest;
 import com.digital_zone.userservice.dtos.UserResponse;
 import com.digital_zone.userservice.services.UserService;
+import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @RestController
@@ -47,5 +53,27 @@ public class UserRestController {
     public ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
         userService.deleteUser(userId);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/addEmail")
+    public ResponseEntity<UserResponse> addEmail(@RequestBody AddEmailRequest addEmailRequest, HttpServletRequest httpRequest) throws MessagingException, UnsupportedEncodingException {
+        UserResponse createdUser = userService.addEmail(addEmailRequest, getSiteURL(httpRequest));
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+    }
+
+    @GetMapping("/verify")
+    public ModelAndView verifyUser(@Param("code") String code) {
+        ModelAndView modelAndView = new ModelAndView();
+        if (userService.verifyEmail(code)) {
+            modelAndView.setViewName("verify_success");
+        } else {
+            modelAndView.setViewName("verify_failed");
+        }
+        return modelAndView;
+    }
+
+    private String getSiteURL(HttpServletRequest request) {
+        String siteURL = request.getRequestURL().toString();
+        return siteURL.replace(request.getServletPath(), "");
     }
 }

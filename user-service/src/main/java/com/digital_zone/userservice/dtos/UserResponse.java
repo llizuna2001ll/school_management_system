@@ -19,6 +19,8 @@ public class UserResponse {
     private String birthPlace;
     private String address;
     private String phoneNumber;
+    private String username;
+    private String registrationDate;
     private Roles role;
 
     public static UserResponse toUserResponse(User user){
@@ -26,11 +28,13 @@ public class UserResponse {
                 .id(user.getId())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
+                .username(user.getUsername())
                 .address(user.getAddress())
                 .email(user.getEmail())
                 .birthDate(user.getBirthDate())
                 .birthPlace(user.getBirthPlace())
                 .phoneNumber(user.getPhoneNumber())
+                .registrationDate(user.getRegistrationDate())
                 .role(user.getRole())
                 .build();
     }
