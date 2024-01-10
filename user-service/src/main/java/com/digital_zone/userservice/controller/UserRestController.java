@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.UnsupportedEncodingException;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -30,6 +30,12 @@ public class UserRestController {
     @GetMapping
     public ResponseEntity<List<UserResponse>> getUsers() {
         List<UserResponse> users = userService.getUsers();
+        return ResponseEntity.ok(users);
+    }
+
+    @GetMapping("/grade")
+    public ResponseEntity<List<UserResponse>> getUsersByGrade(@RequestParam String grade) {
+        List<UserResponse> users = userService.getUsersByGrade(grade);
         return ResponseEntity.ok(users);
     }
 
@@ -56,9 +62,9 @@ public class UserRestController {
     }
 
     @PostMapping("/addEmail")
-    public ResponseEntity<UserResponse> addEmail(@RequestBody AddEmailRequest addEmailRequest, HttpServletRequest httpRequest) throws MessagingException, UnsupportedEncodingException {
-        UserResponse createdUser = userService.addEmail(addEmailRequest, getSiteURL(httpRequest));
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+    public ResponseEntity<UserResponse> addEmail(@RequestBody AddEmailRequest addEmailRequest, HttpServletRequest httpRequest) throws MessagingException, IOException {
+        UserResponse user = userService.addEmail(addEmailRequest, getSiteURL(httpRequest));
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
     @GetMapping("/verify")
@@ -70,6 +76,18 @@ public class UserRestController {
             modelAndView.setViewName("verify_failed");
         }
         return modelAndView;
+    }
+
+    @PutMapping("/{userId}/assignGrade")
+    public ResponseEntity<UserResponse> assignGrade(@PathVariable Long userId, @RequestParam String grade) {
+        UserResponse user = userService.assignGrade(grade, userId);
+        return ResponseEntity.status(HttpStatus.OK).body(user);
+    }
+
+    @PutMapping("/{userId}/unassignGrade")
+    public ResponseEntity<UserResponse> unassignGrade(@PathVariable Long userId, @RequestParam String grade) {
+        UserResponse user = userService.unassignGrade(grade, userId);
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
     private String getSiteURL(HttpServletRequest request) {

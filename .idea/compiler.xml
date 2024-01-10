@@ -7,9 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="user-service" />
+        <module name="grade-service" />
         <module name="gateway-service" />
         <module name="discovery-service" />
-        <module name="user-service" />
+        <module name="shared-models" />
       </profile>
     </annotationProcessing>
   </component>
@@ -17,6 +19,8 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="discovery-service" options="-parameters" />
       <module name="gateway-service" options="-parameters" />
+      <module name="grade-service" options="-parameters" />
+      <module name="shared-models" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
   </component>

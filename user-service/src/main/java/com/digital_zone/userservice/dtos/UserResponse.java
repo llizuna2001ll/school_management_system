@@ -2,6 +2,7 @@ package com.digital_zone.userservice.dtos;
 
 import com.digital_zone.userservice.entities.User;
 import com.digital_zone.userservice.enums.Roles;
+import com.digital_zone.userservice.enums.Sexe;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,6 +23,8 @@ public class UserResponse {
     private String username;
     private String registrationDate;
     private Roles role;
+    private Sexe sexe;
+    private String grade;
 
     public static UserResponse toUserResponse(User user){
         return UserResponse.builder()
@@ -36,6 +39,8 @@ public class UserResponse {
                 .phoneNumber(user.getPhoneNumber())
                 .registrationDate(user.getRegistrationDate())
                 .role(user.getRole())
+                .sexe(user.getSexe())
+                .grade(user.getGrade())
                 .build();
     }
 

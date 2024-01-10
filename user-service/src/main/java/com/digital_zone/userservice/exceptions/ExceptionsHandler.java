@@ -19,4 +19,12 @@ public class ExceptionsHandler {
         ex.getBindingResult().getFieldErrors().forEach(error -> errorMap.put("error", error.getDefaultMessage()));
         return errorMap;
     }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(UserNotFoundException.class)
+    public Map<String, String> handleUserNotFoundException(UserNotFoundException ex) {
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("error", ex.getMessage());
+        return errorMap;
+    }
 }

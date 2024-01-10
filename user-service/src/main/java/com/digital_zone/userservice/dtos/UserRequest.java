@@ -1,5 +1,6 @@
 package com.digital_zone.userservice.dtos;
 
+import com.digital_zone.userservice.enums.Sexe;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,4 +18,6 @@ public class UserRequest {
     private String birthPlace;
     private String address;
     private String phoneNumber;
+    private Sexe sexe;
+    private String grade;
 }

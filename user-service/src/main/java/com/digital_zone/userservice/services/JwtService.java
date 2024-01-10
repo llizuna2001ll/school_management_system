@@ -1,5 +1,6 @@
 package com.digital_zone.userservice.services;
 
+import com.digital_zone.userservice.entities.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -40,7 +41,9 @@ public class JwtService {
     }
 
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails){
+        User user = (User) userDetails; // Assuming UserDetails is an instance of your User class
 
+        extraClaims.put("userId", user.getId()); // Adding user ID as a claim
         extraClaims.put("authorities", userDetails.getAuthorities());
 
         return Jwts.builder()

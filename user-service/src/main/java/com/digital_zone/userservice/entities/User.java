@@ -2,6 +2,7 @@ package com.digital_zone.userservice.entities;
 
 import com.digital_zone.userservice.dtos.UserRequest;
 import com.digital_zone.userservice.enums.Roles;
+import com.digital_zone.userservice.enums.Sexe;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -40,13 +41,15 @@ public class User implements UserDetails {
     private String registrationDate;
     @Enumerated(EnumType.STRING)
     private Roles role;
+    @Enumerated(EnumType.STRING)
+    private Sexe sexe;
+    private String grade;
     @JsonIgnore
     private String verificationCode;
     @JsonIgnore
     private String resetPasswordCode;
     @JsonIgnore
     private boolean enabled;
-
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDateTime creationTime;
 
@@ -58,6 +61,8 @@ public class User implements UserDetails {
                 .birthDate(userRequest.getBirthDate())
                 .birthPlace(userRequest.getBirthPlace())
                 .phoneNumber(userRequest.getPhoneNumber())
+                .sexe(userRequest.getSexe())
+                .grade(userRequest.getGrade())
                 .build();
     }
 
