@@ -169,5 +169,4 @@ public class UserServiceImpl implements UserService {
         return UserResponse.toUserResponse(user);
     }
 
-
 }

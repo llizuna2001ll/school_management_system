@@ -12,7 +12,15 @@
         <option value="$PROJECT_DIR$/discovery-service/pom.xml" />
         <option value="$PROJECT_DIR$/grade-service/pom.xml" />
         <option value="$PROJECT_DIR$/shared-models/pom.xml" />
+        <option value="$PROJECT_DIR$/class-service/pom.xml" />
+        <option value="$PROJECT_DIR$/attendance-service/pom.xml" />
+        <option value="$PROJECT_DIR$/subject-service/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/shared-models/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_20" default="true" project-jdk-name="corretto-20" project-jdk-type="JavaSDK">
