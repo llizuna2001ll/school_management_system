@@ -1,5 +1,6 @@
 package com.digital_zone.gradeservice.entities;
 
+import com.digital_zone.gradeservice.models.SubjectModel;
 import com.digital_zone.gradeservice.models.UserModel;
 import jakarta.persistence.*;
 import lombok.*;
@@ -20,4 +21,6 @@ public class Grade {
     private Integer studentCount;
     @Transient
     private List<UserModel> users;
+    @Transient
+    private List<SubjectModel> subjects;
 }

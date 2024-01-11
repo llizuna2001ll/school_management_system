@@ -33,6 +33,7 @@ services:
 
   student_management_grades-service:
     container_name: student_management_grades-service
+    restart: always
     ports:
       - '8081:8081'
     depends_on:
@@ -108,7 +109,7 @@ services:
       - spring.datasource.password=studentMANAGEMENT123456
       - spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
       - server.port=8080
-      - spring.application.name=grade-service
+      - spring.application.name=user-service
       - spring.application.version=1.0.0
       - spring.application.authors=Digital_Zone
       - spring.cloud.discovery.enabled=true
